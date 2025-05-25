@@ -6,13 +6,13 @@ import { Button, Collapse } from "react-bootstrap";
 export default function PromoPage() {
   const location = useLocation();
   const navigate = useNavigate();
-  const promoId = location.pathname.substring(1);
-  const promo = getPromo(promoId);
+  const promoPath = location.pathname.substring(1);
+  const promo = getPromo(promoPath);
 
   const [tycOpen, setTycOpen] = useState(false);
 
   return (
-    <div className="promoPageBody min-vh-100">
+    <div id={promo.id} className="promoPageBody min-vh-100">
       <div
         style={{ backgroundColor: "#252A30" }}
         className="w-50 m-auto p-3 d-flex flex-column min-vh-100"
@@ -39,36 +39,38 @@ export default function PromoPage() {
 
         <div className="steps-section mx-auto mt-3 fs-3">
           <h2 className="text-center">EMPIEZA A JUGAR EN 3 PASOS</h2>
-          <div className="row justify-content-around">
-            {promo.steps.map((step, i) => (
-              <div className="col-4 d-flex align-items-center" key={i}>
-                <span className="rounded-circle bg-primary px-3 py-1">
-                  {" "}
-                  {i + 1}{" "}
-                </span>
-                <div
-                  className="d-flex flex-column ps-3"
-                  // style={{ width: "auto" }}
-                >
-                  <div className="fs-5 fw-bold text-codere">{step.title}</div>
-                  <p className="fs-7">{step.text}</p>
-                </div>
-                {i + 2 <= promo.steps.length && (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="70"
-                    height="70"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    viewBox="0 0 24 24"
+          {!!promo.steps && (
+            <div className="row justify-content-around">
+              {promo.steps.map((step, i) => (
+                <div className="col-4 d-flex align-items-center" key={i}>
+                  <span className="rounded-circle bg-primary px-3 py-1">
+                    {" "}
+                    {i + 1}{" "}
+                  </span>
+                  <div
+                    className="d-flex flex-column ps-3"
+                    // style={{ width: "auto" }}
                   >
-                    <path d="M9 6l6 6-6 6" />
-                  </svg>
-                )}
-              </div>
-            ))}
-          </div>
+                    <div className="fs-5 fw-bold text-codere">{step.title}</div>
+                    <p className="fs-7">{step.text}</p>
+                  </div>
+                  {i + 2 <= promo.steps.length && (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="70"
+                      height="70"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M9 6l6 6-6 6" />
+                    </svg>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="regis-section _m-auto text-center">

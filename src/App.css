@@ -20,7 +20,7 @@ body {
 .tab-active {
   color: #79c000 !important;
   border-bottom: 4px solid #79c000;
-  /* background-color: #334048aa !important; */
+  background-color: #334048aa !important;
 }
 
 .tab-active img {
