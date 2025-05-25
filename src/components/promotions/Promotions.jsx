@@ -2,8 +2,10 @@ import PromotionItem from "./PromotionItem";
 import myStore from "../../mobX/myStore";
 import { observer } from "mobx-react";
 
-const Promotions = observer(({ optinedList }) => {
+const Promotions = observer(({ optinedList, isVip }) => {
   console.log(optinedList);
+  console.log("isVip >>", isVip);
+  console.log("myStore.type >>", myStore.type);
 
   const promotions = [
     {
@@ -24,6 +26,16 @@ const Promotions = observer(({ optinedList }) => {
       image:
         "https://www.codere.mx/library/00Promo2022/Casino/LionsMegaways2/600x600-Promoition.jpg",
     },
+    {
+      id: "PAGO_ANTICIPADO",
+      type: "vip",
+      name: "pago-anticipado",
+      title: "PAGO ANTICIPADO FÚTBOL",
+      offer: "Juega a tu favorito y con ventaja de 2 goles ¡GANAS!",
+      image:
+        "https://www.codere.mx/library/Promotions/CRM/PAGO%20ANTICIPADO/NewFutbol/600x600-Promotion.jpg",
+    },
+
     {
       id: 3,
       type: "deportes",
@@ -57,13 +69,14 @@ const Promotions = observer(({ optinedList }) => {
     <div className="row d-flex justify-content-center w-75 m-auto gap-4 mt-4">
       {promotions
         .filter((promo) => {
-          if (myStore.type === "todos") return promo;
+          if (!isVip && promo.type === "vip") return;
+          else if (myStore.type === "todos") return promo;
           else return promo.type === myStore.type;
         })
         .map((promo, i) => (
           <div className="col-md-3 col-ms-12" key={i}>
             <PromotionItem
-              isOptined={optinedList.some(
+              isOptined={optinedList?.some(
                 (optin) => optin.promoId === promo.id
               )}
               promo={promo}

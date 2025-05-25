@@ -18,7 +18,7 @@ export default function PromoPage() {
         className="w-50 m-auto p-3 d-flex flex-column min-vh-100"
       >
         <div
-          onClick={() => navigate("/")}
+          onClick={() => navigate(`/${location.search}`)}
           className="position-absolute fs-4 cursor-pointer"
         >
           <svg

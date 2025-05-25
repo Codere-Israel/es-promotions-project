@@ -7,10 +7,15 @@ export default function Homepage() {
   const [searchParams, setSearchParams] = useSearchParams();
   console.log([...searchParams.entries()]);
 
+  const isVip = searchParams.get("vipEstado") === "yes";
+
   return (
     <>
-      <Navigation isVip={searchParams.get("vipEstado") === "yes"} />
-      <Promotions optinedList={JSON.parse(searchParams.get("promoList"))} />
+      <Navigation isVip={isVip} />
+      <Promotions
+        optinedList={JSON.parse(searchParams.get("promoList"))}
+        isVip={isVip}
+      />
     </>
   );
 }

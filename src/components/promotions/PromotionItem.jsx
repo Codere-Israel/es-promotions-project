@@ -1,8 +1,9 @@
 import { Button } from "react-bootstrap";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function PromotionItem({ isOptined, promo }) {
+  const location = useLocation();
   const navigate = useNavigate();
 
   return (
@@ -31,7 +32,7 @@ export default function PromotionItem({ isOptined, promo }) {
           className="d-grid px-1 gap-2 w-100 justify-content-center pb-2"
         >
           <Button
-            onClick={() => navigate(`/${promo.name}`)}
+            onClick={() => navigate(`/${promo.name}${location.search}`)}
             className="info-btn"
           >
             Mas Info
